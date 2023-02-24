@@ -1,0 +1,7 @@
+[user]
+	email = mecaneer23@gmail.com
+	name = mecaneer23
+[safe]
+	directory = /mnt/gdrive/My Drive/code/*
+[credential]
+	helper = store
