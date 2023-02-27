@@ -3,5 +3,6 @@
 	name = mecaneer23
 [safe]
 	directory = /mnt/gdrive/My Drive/code/*
+	directory = %(prefix)///wsl.localhost/Ubuntu/home/mecaneer23
 [credential]
 	helper = store
