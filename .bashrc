@@ -140,7 +140,8 @@ run-from-drive() {
     elif [ "$1" = "wordle" ]; then
         sub="wordle/solver.py"
     fi
-    eval $directory$sub
+    shift
+    eval $directory$sub "$@"
 }
 
 mnt() {
@@ -206,12 +207,12 @@ alias py=python3
 alias py310="python3.10"
 alias ipy=ipython
 
-alias bs="run-from-drive bin-snake"
-alias snake="run-from-drive snake"
-alias sl="run-from-drive sl"
-alias becho="run-from-drive becho"
-alias clock="run-from-drive clock"
-alias wordle="run-from-drive wordle"
+alias bs="run-from-drive bin-snake $@"
+alias snake="run-from-drive snake $@"
+alias sl="run-from-drive sl $@"
+alias becho="run-from-drive becho $@"
+alias clock="run-from-drive clock $@"
+alias wordle="run-from-drive wordle $@"
 
 alias code="powershell.exe -c code ."
 alias cmd="powershell.exe"
