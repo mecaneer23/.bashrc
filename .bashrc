@@ -114,14 +114,33 @@ set_prompt_short() {
 }
 
 git() {
-    if [ "$1" = "push" ]; then
-    shift
-    powershell.exe -c git push
-    elif [ "$1" = "statsu" ]; then
+    # if [ "$1" = "push" ]; then
+    # shift
+    # powershell.exe -c git push
+    # el
+    if [ "$1" = "statsu" ]; then
         git status
     else 
         command git "$@"
     fi
+}
+
+run-from-drive() {
+    directory="/mnt/gdrive/My\ Drive/code/"
+    if [ "$1" = "bin-snake" ]; then
+        sub="programming-languages/bin-snake/bin_snake.py"
+    elif [ "$1" = "snake" ]; then
+        sub="snake/python-snake-game/snake.py"
+    elif [ "$1" = "sl" ]; then
+        sub="sl/sl.py"
+    elif [ "$1" = "becho" ]; then
+        sub="becho/becho"
+    elif [ "$1" = "clock" ]; then
+        sub="clock/ascii/clock.py"
+    elif [ "$1" = "wordle" ]; then
+        sub="wordle/solver.py"
+    fi
+    eval $directory$sub
 }
 
 mnt() {
@@ -165,6 +184,7 @@ alias ac="vim + /mnt/c/Users/mecan/AppData/Roaming/alacritty/alacritty.yml"
 alias celar=clear
 
 alias sps=set_prompt_short
+alias reset-time=set_time
 
 alias c="cd /mnt/c/Users/mecan/OneDrive/Documents/"
 alias g="cd /mnt/gdrive/My\ Drive/code/"
@@ -186,12 +206,12 @@ alias py=python3
 alias py310="python3.10"
 alias ipy=ipython
 
-alias bs="/mnt/gdrive/My\ Drive/Code/programming-languages/bin-snake/bin_snake.py"
-alias snake="/mnt/gdrive/My\ Drive/code/snake/python-snake-game/snake.py"
-alias sl="/mnt/gdrive/My\ Drive/code/sl/sl.py"
-alias becho="/mnt/gdrive/My\ Drive/code/becho/becho"
-alias clock="/mnt/gdrive/My\ Drive/code/clock/ascii/clock.py"
-alias wordle="/mnt/gdrive/My\ Drive/code/wordle/solver.py"
+alias bs="run-from-drive bin-snake"
+alias snake="run-from-drive snake"
+alias sl="run-from-drive sl"
+alias becho="run-from-drive becho"
+alias clock="run-from-drive clock"
+alias wordle="run-from-drive wordle"
 
 alias code="powershell.exe -c code ."
 alias cmd="powershell.exe"
