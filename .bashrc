@@ -129,21 +129,24 @@ git() {
 
 run-from-drive() {
     directory="/mnt/gdrive/My\ Drive/code/"
-    if [ "$1" = "bin-snake" ]; then
-        sub="programming-languages/bin-snake/bin_snake.py"
-    elif [ "$1" = "snake" ]; then
-        sub="snake/python-snake-game/snake.py"
-    elif [ "$1" = "sl" ]; then
-        sub="sl/sl.py"
-    elif [ "$1" = "becho" ]; then
-        sub="becho/becho"
-    elif [ "$1" = "clock" ]; then
-        sub="clock/ascii/clock.py"
-    elif [ "$1" = "wordle" ]; then
-        sub="wordle/solver.py"
-     elif [ "$1" = "HackerCode" ]; then
-        sub="hackercode/hackercode/HackerCode.py"
-    fi
+    case "$1" in
+        "bin-snake")
+            sub="programming-languages/bin-snake/bin_snake.py" ;;
+        "snake")
+            sub="snake/python-snake-game/snake.py" ;;
+        "sl")
+            sub="sl/sl.py" ;;
+        "becho")
+            sub="becho/becho" ;;
+        "clock")
+            sub="clock/ascii/clock.py" ;;
+        "wordle")
+            sub="wordle/solver.py" ;;
+        "HackerCode")
+            sub="hackercode/hackercode/HackerCode.py" ;;
+        *)
+            echo "$@ not implemented in run-from-drive function" ;;
+    esac
     shift
     eval $directory$sub "$@"
 }
