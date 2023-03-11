@@ -26,6 +26,7 @@ fi
 
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\][\u@\h]:\[\033[00m\]\n\[\033[01;34m\]\w\[\033[00m\]\$ '
+    # PS1='#\[\033[30m\]#\[\033[31m\]#\[\033[32m\]#\[\033[33m\]#\[\033[34m\]#\[\033[35m\]#\[\033[36m\]#\n\[\033[37m\]\[\033[0m\][\W]\$ '
 else
 PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -73,9 +74,6 @@ fi
 fi
 # . "$HOME/.cargo/env"
 export PATH="$PATH:$HOME/.cargo/bin"
-if [ ! "$(ls -A /mnt/gdrive)" ]; then
-    sudo mount -t drvfs G: /mnt/gdrive
-fi
 
 if [[ $(service ssh status | grep "not") ]]; then
     sudo service ssh start
@@ -113,6 +111,10 @@ set_prompt_short() {
     export PS1="[\W]\$ "
 }
 
+set_color_prompt() {
+    export PS1='#\[\033[30m\]#\[\033[31m\]#\[\033[32m\]#\[\033[33m\]#\[\033[34m\]#\[\033[35m\]#\[\033[36m\]#\n\[\033[37m\]#\[\033[1;30m\]#\[\033[1;31m\]#\[\033[1;32m\]#\[\033[1;33m\]#\[\033[1;34m\]#\[\033[1;35m\]#\[\033[1;36m\]#\[\033[1;37m\]#\[\033[0m\]\n[\W]\$ '
+}
+
 git() {
     # if [ "$1" = "push" ]; then
     # shift
@@ -139,6 +141,8 @@ run-from-drive() {
         sub="clock/ascii/clock.py"
     elif [ "$1" = "wordle" ]; then
         sub="wordle/solver.py"
+     elif [ "$1" = "HackerCode" ]; then
+        sub="hackercode/hackercode/HackerCode.py"
     fi
     shift
     eval $directory$sub "$@"
@@ -165,11 +169,34 @@ display-swap() {
     echo $DISPLAY;
 }
 
+# acl() {
+#   if [[ ! $1 ]]; then
+#     alacritty-color --list
+#   else
+#     alacritty-color --list | grep $1
+#   fi
+# }
+
+mount-gdrive() {
+    if [ $1 == "g" ]; then
+        sudo mount -t drvfs G: /mnt/gdrive
+    elif [ $1 == "h" ]; then
+        sudo mount -t drvfs H: /mnt/gdrive
+    fi
+}
+
+if [ ! "$(ls -A /mnt/gdrive)" ]; then
+    mount-gdrive g
+    #if [ "$out" ]; then
+    #   sudo umount /mnt/gdrive
+    #   sudo mount -t drvfs H: /mnt/gdrive
+    #fi
+fi
+
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
 
-alias hc=HackerCode
 alias lc=lolcat
 alias cmx=cmatrix
 alias batcat=bat
@@ -213,6 +240,7 @@ alias sl="run-from-drive sl $@"
 alias becho="run-from-drive becho $@"
 alias clock="run-from-drive clock $@"
 alias wordle="run-from-drive wordle $@"
+alias hc="run-from-drive HackerCode $@"
 
 alias code="powershell.exe -c code ."
 alias cmd="powershell.exe"
