@@ -26,7 +26,6 @@ fi
 
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\][\u@\h]:\[\033[00m\]\n\[\033[01;34m\]\w\[\033[00m\]\$ '
-    # PS1='#\[\033[30m\]#\[\033[31m\]#\[\033[32m\]#\[\033[33m\]#\[\033[34m\]#\[\033[35m\]#\[\033[36m\]#\n\[\033[37m\]\[\033[0m\][\W]\$ '
 else
 PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -85,11 +84,6 @@ set_time() {
     sudo ntpdate time.windows.com
 }
 
-set_prompt() {
-    export PS1=$1
-    echo "https://phoenixnap.com/kb/change-bash-prompt-linux"
-}
-
 nf() {
     if [[ ! $1 ]]; then
     neofetch --ascii_distro arch
@@ -103,23 +97,30 @@ clearls() {
     ls --color=auto
 }
 
-set_dollar_sign() {
-    export PS1="$ "
+set_prompt() {
+    export PS1=$1
+    echo "https://phoenixnap.com/kb/change-bash-prompt-linux"
 }
 
-set_prompt_short() {
-    export PS1="[\W]\$ "
+set-prompt-dollar() {
+    export PS1="\[\033[1;32m\]$\[\033[0m\] "
 }
 
-set_color_prompt() {
-    export PS1='#\[\033[30m\]#\[\033[31m\]#\[\033[32m\]#\[\033[33m\]#\[\033[34m\]#\[\033[35m\]#\[\033[36m\]#\n\[\033[37m\]#\[\033[1;30m\]#\[\033[1;31m\]#\[\033[1;32m\]#\[\033[1;33m\]#\[\033[1;34m\]#\[\033[1;35m\]#\[\033[1;36m\]#\[\033[1;37m\]#\[\033[0m\]\n[\W]\$ '
+set-prompt-short() {
+    export PS1="\[\033[1;32m\][\[\033[1;34m\]\W\[\033[1;32m\]]\[\033[0m\]\$ "
+}
+
+set-prompt-color() {
+    export PS1='#\[\033[30m\]#\[\033[31m\]#\[\033[32m\]#\[\033[33m\]#\[\033[34m\]#\[\033[35m\]#\[\033[36m\]#
+\[\033[37m\]#\[\033[1;30m\]#\[\033[1;31m\]#\[\033[1;32m\]#\[\033[1;33m\]#\[\033[1;34m\]#\[\033[1;35m\]#\[\033[1;36m\]#\[\033[1;37m\]#\[\033[0m\]
+\[\033[1;32m\][\[\033[1;34m\]\W\[\033[1;32m\]]\[\033[0m\]\$ '
 }
 
 git() {
     # if [ "$1" = "push" ]; then
     # shift
     # powershell.exe -c git push
-    # el
+    # elif
     if [ "$1" = "statsu" ]; then
         git status
     else 
@@ -144,8 +145,14 @@ run-from-drive() {
             sub="wordle/solver.py" ;;
         "HackerCode")
             sub="hackercode/hackercode/HackerCode.py" ;;
+        "help")
+            type run-from-drive 
+            exit
+            ;;
         *)
-            echo "$@ not implemented in run-from-drive function" ;;
+            echo "$@ not implemented in run-from-drive function"
+            exit
+            ;;
     esac
     shift
     eval $directory$sub "$@"
@@ -214,7 +221,9 @@ alias ac="vim + /mnt/c/Users/mecan/AppData/Roaming/alacritty/alacritty.yml"
 
 alias celar=clear
 
-alias sps=set_prompt_short
+alias sps=set-prompt-short
+alias spd=set-prompt-dollar
+alias spc=set-prompt-color
 alias reset-time=set_time
 
 alias c="cd /mnt/c/Users/mecan/OneDrive/Documents/"
