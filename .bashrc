@@ -147,11 +147,11 @@ run-from-drive() {
             sub="hackercode/hackercode/HackerCode.py" ;;
         "help")
             type run-from-drive 
-            exit
+            return
             ;;
         *)
             echo "$@ not implemented in run-from-drive function"
-            exit
+            return
             ;;
     esac
     shift
@@ -220,6 +220,10 @@ alias ac="vim + /mnt/c/Users/mecan/AppData/Roaming/alacritty/alacritty.yml"
 # alias acr="alacritty-color --random"
 
 alias celar=clear
+
+alias ga="git add"
+alias gc="git commit -m"
+alias gp="git push"
 
 alias sps=set-prompt-short
 alias spd=set-prompt-dollar
