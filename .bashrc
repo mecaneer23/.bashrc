@@ -116,6 +116,30 @@ set-prompt-color() {
 \[\033[1;32m\][\[\033[1;34m\]\W\[\033[1;32m\]]\[\033[0m\]\$ '
 }
 
+ex() {
+  if [ -f $1 ]; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1   ;;
+      *.tar.gz)    tar xzf $1   ;;
+      *.bz2)       bunzip2 $1   ;;
+      *.rar)       unrar x $1   ;;
+      *.gz)        gunzip $1    ;;
+      *.tar)       tar xf $1    ;;
+      *.tbz2)      tar xjf $1   ;;
+      *.tgz)       tar xzf $1   ;;
+      *.zip)       unzip $1     ;;
+      *.Z)         uncompress $1;;
+      *.7z)        7z x $1      ;;
+      *.deb)       ar x $1      ;;
+      *.tar.xz)    tar xf $1    ;;
+      *.tar.zst)   tar xf $1    ;;
+      *)           echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
 git() {
     # if [ "$1" = "push" ]; then
     # shift
@@ -203,9 +227,10 @@ if [ ! "$(ls -A /mnt/gdrive)" ]; then
     #fi
 fi
 
-alias ll='ls -l'
+alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
+alias l.="ls -A | grep -E '^\.'"
 
 alias lc=lolcat
 alias cmx=cmatrix
