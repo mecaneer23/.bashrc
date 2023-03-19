@@ -248,8 +248,10 @@ alias celar=clear
 
 alias ga="git add"
 alias gc="git commit -m"
-alias gp="git push"
+alias gph="git push"
+alias gpl="git pull"
 alias gs="git status"
+alias gd="git diff"
 
 alias sps=set-prompt-short
 alias spd=set-prompt-dollar
