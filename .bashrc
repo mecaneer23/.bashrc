@@ -152,6 +152,19 @@ git() {
     fi
 }
 
+sudo() {
+    if [ "$1" = "apt" ]; then
+        shift
+        if [ "$1" = "update" ]; then
+            command sudo apt update || (reset-time && sudo apt update)
+        else
+            command sudo apt "$@"
+        fi
+    else
+        command sudo "$@"
+    fi
+}
+
 run-from-drive() {
     directory="/mnt/gdrive/My\ Drive/code/"
     case "$1" in
@@ -169,6 +182,8 @@ run-from-drive() {
             sub="wordle/solver.py" ;;
         "HackerCode")
             sub="hackercode/hackercode/HackerCode.py" ;;
+        "todo")
+            sub="todo/todo.py" ;;
         "help")
             type run-from-drive 
             return
@@ -286,6 +301,7 @@ alias becho="run-from-drive becho $@"
 alias clock="run-from-drive clock $@"
 alias wordle="run-from-drive wordle $@"
 alias hc="run-from-drive HackerCode $@"
+alias todo="run-from-drive todo $@"
 
 alias code="powershell.exe -c code ."
 alias cmd="powershell.exe"
