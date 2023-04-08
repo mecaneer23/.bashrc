@@ -3,6 +3,7 @@ case $- in
     *i*) ;;
     *) return;;
 esac
+DEPENDENCIES=1
 HISTCONTROL=ignoreboth
 shopt -s histappend
 HISTSIZE=1000
@@ -74,10 +75,12 @@ fi
 # . "$HOME/.cargo/env"
 export PATH="$PATH:$HOME/.cargo/bin"
 
-if [[ $(service ssh status | grep "not") ]]; then
-    sudo service ssh start
+if ((DEPENDENCIES)); then
+    if [[ $(service ssh status | grep "not") ]]; then
+        sudo service ssh start
+    fi
+    theme.sh kimber # spacedust
 fi
-theme.sh kimber # spacedust
 
 set_time() {
     # sudo hwclock -s
@@ -234,12 +237,14 @@ mount-gdrive() {
     fi
 }
 
-if [ ! "$(ls -A /mnt/gdrive)" ]; then
-    mount-gdrive g
-    #if [ "$out" ]; then
-    #   sudo umount /mnt/gdrive
-    #   sudo mount -t drvfs H: /mnt/gdrive
-    #fi
+if ((DEPENDENCIES)); then
+    if [ ! "$(ls -A /mnt/gdrive)" ]; then
+        mount-gdrive g
+        #if [ "$out" ]; then
+        #   sudo umount /mnt/gdrive
+        #   sudo mount -t drvfs H: /mnt/gdrive
+        #fi
+    fi
 fi
 
 alias ll='ls -alFh'
