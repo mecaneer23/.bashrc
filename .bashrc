@@ -268,6 +268,9 @@ alias gp="git push"
 alias gpl="git pull"
 alias gs="git status"
 alias gd="git diff"
+clone() {
+    git clone https://github.com/mecaneer23/$1
+}
 
 alias sps=set-prompt-short
 alias spd=set-prompt-dollar
