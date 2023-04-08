@@ -239,7 +239,7 @@ mount-gdrive() {
 
 if ((DEPENDENCIES)); then
     if [ ! "$(ls -A /mnt/gdrive)" ]; then
-        mount-gdrive g
+        mount-gdrive g || echo "If this error bothers you, consider setting the DEPENDENCIES flag at the top of this file to '0'"
         #if [ "$out" ]; then
         #   sudo umount /mnt/gdrive
         #   sudo mount -t drvfs H: /mnt/gdrive
