@@ -251,7 +251,7 @@ alias lc=lolcat
 alias cmx=cmatrix
 alias batcat=bat
 
-alias rc="vim /home/mecaneer23/.bashrc && source /home/mecaneer23/.bashrc"
+alias rc="vim ~/.bashrc && source ~/.bashrc"
 alias vimrc="vim /home/mecaneer23/.vimrc"
 alias ac="vim + /mnt/c/Users/mecan/AppData/Roaming/alacritty/alacritty.yml"
 
