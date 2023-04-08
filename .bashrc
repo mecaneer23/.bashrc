@@ -3,7 +3,10 @@ case $- in
     *i*) ;;
     *) return;;
 esac
+
 DEPENDENCIES=1
+ALACRITTYCOLOR=0
+
 HISTCONTROL=ignoreboth
 shopt -s histappend
 HISTSIZE=1000
@@ -79,7 +82,6 @@ if ((DEPENDENCIES)); then
     if [[ $(service ssh status | grep "not") ]]; then
         sudo service ssh start
     fi
-    theme.sh kimber # spacedust
 fi
 
 set_time() {
@@ -260,9 +262,15 @@ alias rc="vim ~/.bashrc && source ~/.bashrc"
 alias vimrc="vim /home/mecaneer23/.vimrc"
 alias ac="vim + /mnt/c/Users/mecan/AppData/Roaming/alacritty/alacritty.yml"
 
-# alias ac="alacritty-color"
-# alias acc="alacritty-color --current"
-# alias acr="alacritty-color --random"
+if ((DEPENDENCIES)); then
+    if ((ALACRITTYCOLOR)); then
+	alias ac="alacritty-color"
+	alias acc="alacritty-color --current"
+	alias acr="alacritty-color --random"
+    else
+	theme.sh kimber # spacedust
+    fi
+fi
 
 alias celar=clear
 
