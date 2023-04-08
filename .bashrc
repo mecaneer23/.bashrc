@@ -223,14 +223,6 @@ display-swap() {
     echo $DISPLAY;
 }
 
-# acl() {
-#   if [[ ! $1 ]]; then
-#     alacritty-color --list
-#   else
-#     alacritty-color --list | grep $1
-#   fi
-# }
-
 mount-gdrive() {
     if [ $1 == "g" ]; then
         sudo mount -t drvfs G: /mnt/gdrive
@@ -260,15 +252,22 @@ alias batcat=bat
 
 alias rc="vim ~/.bashrc && source ~/.bashrc"
 alias vimrc="vim /home/mecaneer23/.vimrc"
-alias ac="vim + /mnt/c/Users/mecan/AppData/Roaming/alacritty/alacritty.yml"
 
 if ((DEPENDENCIES)); then
     if ((ALACRITTYCOLOR)); then
 	alias ac="alacritty-color"
 	alias acc="alacritty-color --current"
 	alias acr="alacritty-color --random"
+	acl() {
+	  if [[ ! $1 ]]; then
+	    alacritty-color --list
+	  else
+	    alacritty-color --list | grep $1
+	  fi
+	}
     else
 	theme.sh kimber # spacedust
+	alias ac="vim + /mnt/c/Users/mecan/AppData/Roaming/alacritty/alacritty.yml"
     fi
 fi
 
