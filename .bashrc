@@ -4,8 +4,10 @@ case $- in
     *) return;;
 esac
 
-DEPENDENCIES=1
-ALACRITTYCOLOR=0
+DEPENDENCY_SERVICE=1
+DEPENDENCY_GDRIVE=1
+DEPENDENCY_THEMES=1
+DEPENDENCY_ALACRITTYCOLOR=1
 
 HISTCONTROL=ignoreboth
 shopt -s histappend
@@ -78,7 +80,11 @@ fi
 # . "$HOME/.cargo/env"
 export PATH="$PATH:$HOME/.cargo/bin"
 
-if ((DEPENDENCIES)); then
+dependency-error() {
+    echo "If this error bothers you, consider setting the DEPENDENCY_$1 flag at the top of this file to '0'"
+}
+
+if ((DEPENDENCY_SERVICE)); then
     if [[ $(service ssh status | grep "not") ]]; then
         sudo service ssh start
     fi
@@ -231,9 +237,9 @@ mount-gdrive() {
     fi
 }
 
-if ((DEPENDENCIES)); then
+if ((DEPENDENCY_GDRIVE)); then
     if [ ! "$(ls -A /mnt/gdrive)" ]; then
-        mount-gdrive g || echo "If this error bothers you, consider setting the DEPENDENCIES flag at the top of this file to '0'"
+        mount-gdrive g || dependency-error GDRIVE
         #if [ "$out" ]; then
         #   sudo umount /mnt/gdrive
         #   sudo mount -t drvfs H: /mnt/gdrive
@@ -253,8 +259,7 @@ alias batcat=bat
 alias rc="vim ~/.bashrc && source ~/.bashrc"
 alias vimrc="vim /home/mecaneer23/.vimrc"
 
-if ((DEPENDENCIES)); then
-    if ((ALACRITTYCOLOR)); then
+if ((DEPENDENCY_ALACRITTYCOLOR)); then
 	alias ac="alacritty-color"
 	alias acc="alacritty-color --current"
 	alias acr="alacritty-color --random"
@@ -265,10 +270,11 @@ if ((DEPENDENCIES)); then
 	    alacritty-color --list | grep $1
 	  fi
 	}
-    else
-	theme.sh kimber # spacedust
+fi
+
+if ((DEPENDENCY_THEMES)); then
+    theme.sh kimber || dependency-error THEMES # spacedust
 	alias ac="vim + /mnt/c/Users/mecan/AppData/Roaming/alacritty/alacritty.yml"
-    fi
 fi
 
 alias celar=clear
