@@ -247,6 +247,8 @@ if ((DEPENDENCY_GDRIVE)); then
     fi
 fi
 
+# Start of alias section
+
 alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
@@ -255,6 +257,7 @@ alias l.="ls -A | grep -E '^\.'"
 alias lc=lolcat
 alias cmx=cmatrix
 alias batcat=bat
+alias mdless=glow 
 
 alias rc="vim ~/.bashrc && source ~/.bashrc"
 alias vimrc="vim /home/mecaneer23/.vimrc"
