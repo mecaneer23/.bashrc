@@ -295,7 +295,7 @@ alias gpl="git pull"
 alias gs="git status"
 alias gd="git diff"
 clone() {
-    git clone https://github.com/mecaneer23/$1
+    git clone https://github.com/mecaneer23/$1 $2
 }
 
 alias sps=set-prompt-short
