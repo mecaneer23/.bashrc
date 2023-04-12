@@ -263,7 +263,14 @@ alias l.="ls -A | grep -E '^\.'"
 alias lc=lolcat
 alias cmx=cmatrix
 alias batcat=bat
-alias vim=nvim
+
+vim() {
+    if [ -d "$1" ]; then
+        command vim $@;
+    else
+        nvim $@;
+    fi
+}
 
 alias rc="vim ~/.bashrc && source ~/.bashrc"
 alias vimrc="vim /home/mecaneer23/.vimrc"
