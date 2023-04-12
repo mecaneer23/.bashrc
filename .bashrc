@@ -6,7 +6,7 @@ esac
 
 DEPENDENCY_SERVICE=1
 DEPENDENCY_GDRIVE=1
-DEPENDENCY_THEMES=1
+DEPENDENCY_THEMES=0
 DEPENDENCY_ALACRITTYCOLOR=1
 
 HISTCONTROL=ignoreboth
@@ -31,9 +31,14 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\][\u@\h]:\[\033[00m\]\n\[\033[01;34m\]\w\[\033[00m\]\$ '
+	prompt_color='\[\033[1;32m\]'
+    if [ "$EUID" -eq 0 ]; then # Change prompt colors for root user
+        prompt_color='\[\033[1;31m\]'
+    fi
+
+    PS1='${debian_chroot:+($debian_chroot)}'$prompt_color'[\u@\h]:\[\033[00m\]\n\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+	PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -171,6 +176,9 @@ sudo() {
         else
             command sudo apt "$@"
         fi
+	elif [ "$1" = "clone" ]; then
+		shift
+		command sudo git clone https://github.com/mecaneer23/"$@"
     else
         command sudo "$@"
     fi
@@ -247,8 +255,6 @@ if ((DEPENDENCY_GDRIVE)); then
     fi
 fi
 
-# Start of alias section
-
 alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
@@ -257,7 +263,6 @@ alias l.="ls -A | grep -E '^\.'"
 alias lc=lolcat
 alias cmx=cmatrix
 alias batcat=bat
-alias mdless=glow 
 
 alias rc="vim ~/.bashrc && source ~/.bashrc"
 alias vimrc="vim /home/mecaneer23/.vimrc"
