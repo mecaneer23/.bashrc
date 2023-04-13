@@ -8,6 +8,7 @@ DEPENDENCY_SERVICE=1
 DEPENDENCY_GDRIVE=1
 DEPENDENCY_THEMES=1
 DEPENDENCY_ALACRITTYCOLOR=0
+DEPENDENCY_NVIM=0
 
 HISTCONTROL=ignoreboth
 shopt -s histappend
@@ -267,8 +268,10 @@ alias batcat=bat
 vim() {
     if [ -d "$1" ]; then
         command vim $@;
-    else
+    elif ((DEPENDENCY_NVIM)); then
         nvim $@;
+	else
+		command vim $@
     fi
 }
 
