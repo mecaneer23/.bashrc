@@ -343,5 +343,7 @@ alias wordle="run-from-drive wordle $@"
 alias hc="run-from-drive HackerCode $@"
 alias todo="run-from-drive todo $@"
 
-alias code="powershell.exe -c code ."
-alias cmd="powershell.exe"
+if ((DEPENDENCY_GDRIVE)); then
+    alias code="powershell.exe -c code ."
+    alias cmd="powershell.exe"
+fi
