@@ -226,6 +226,16 @@ serve() {
     (python3 -c "import webbrowser; webbrowser.open('localhost:8000')" &)
 }
 
+db() {
+    echo 
+    case "${1##*.}" in
+        "py")
+            python3 -m pdb $@ ;;
+        *)
+            gdb $@ ;;
+    esac
+}
+
 export XLAUNCH_DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 export DEFAULT_DISPLAY=$DISPLAY;
 
@@ -333,6 +343,7 @@ alias ssh-home="ssh mecaneer23@ssh.mecaneer23.net"
 alias py=python3
 alias py310="python3.10"
 alias ipy=ipython
+alias pdb="python3 -m pdb"
 
 alias bs="run-from-drive bin-snake $@"
 alias snake="run-from-drive snake $@"
