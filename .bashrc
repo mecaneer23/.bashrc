@@ -7,8 +7,13 @@ esac
 DEPENDENCY_SERVICE=1
 DEPENDENCY_GDRIVE=1
 DEPENDENCY_THEMES=1
+install-themes() {
+    sudo curl -Lo /usr/bin/theme.sh 'https://git.io/JM70M' && sudo chmod +x /usr/bin/theme.sh
+}
 DEPENDENCY_ALACRITTYCOLOR=0
 DEPENDENCY_NVIM=0
+
+CODE_DIR="/mnt/gdrive/My\ Drive/code"
 
 HISTCONTROL=ignoreboth
 shopt -s histappend
@@ -186,7 +191,7 @@ sudo() {
 }
 
 run-from-drive() {
-    directory="/mnt/gdrive/My\ Drive/code/"
+    directory=$CODE_DIR
     case "$1" in
         "bin-snake")
             sub="programming-languages/bin-snake/bin_snake.py" ;;
@@ -286,7 +291,7 @@ vim() {
 }
 
 alias rc="vim ~/.bashrc && source ~/.bashrc"
-alias vimrc="vim /home/mecaneer23/.vimrc"
+alias vimrc="vim /home/$USER/.vimrc"
 
 if ((DEPENDENCY_ALACRITTYCOLOR)); then
 	alias ac="alacritty-color"
@@ -325,7 +330,7 @@ alias spc=set-prompt-color
 alias reset-time=set_time
 
 alias c="cd /mnt/c/Users/mecan/OneDrive/Documents/"
-alias g="cd /mnt/gdrive/My\ Drive/code/"
+alias g="cd $CODE_DIR"
 alias d="cd /mnt/c/Users/mecan/Downloads/"
 
 alias ..="cd .."
