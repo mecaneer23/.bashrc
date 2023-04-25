@@ -7,6 +7,9 @@ esac
 DEPENDENCY_SERVICE=1
 DEPENDENCY_GDRIVE=1
 DEPENDENCY_THEMES=1
+install-themes() {
+    sudo curl -Lo /usr/bin/theme.sh 'https://git.io/JM70M' && sudo chmod +x /usr/bin/theme.sh
+}
 DEPENDENCY_ALACRITTYCOLOR=0
 DEPENDENCY_NVIM=0
 
