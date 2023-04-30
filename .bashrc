@@ -114,6 +114,39 @@ nf() {
     fi
 }
 
+set-resolution() {
+	if [[ $1 == "-h" ]]; then
+		echo "set-resolution 1920 1080 60"
+		return
+	fi
+	if [[ -z "$@" ]]; then
+		echo "An argument is needed to run this script";
+		return
+	else
+		arg="$@"
+		if [[ $(($(echo $arg | grep -o "\s" | wc --chars) / 2 )) -ne 2 ]]; then
+			echo "Invalid Parameters. You need to specify parameters in the format \"width height refreshRate\""
+			echo "For example setResolution \"1920 1080 60\""
+			return
+		fi
+		modename=$(echo $arg | sed 's/\s/_/g')
+		display=$(xrandr | grep -Po '.+(?=\sconnected)')
+		if [[ "$(xrandr|grep $modename)" = "" ]]; then
+			xrandr --newmode $modename $(gtf $(echo $arg) | grep -oP '(?<="\s\s).+') &&
+			xrandr --addmode $display $modename     
+		fi
+		xrandr --output $display --mode $modename
+
+		if [[ $? -eq 0 ]]; then
+			echo "Display changed successfully to $arg"
+		fi
+	fi
+	gtf 1920 1080 60
+	xrandr --newmode "1920x1080_60.00"  172.80  1920 2040 2248 2576  1080 1081 1084 1118  -HSync +Vsync
+	xrandr --addmode VGA1 "1920x1080_60.00"
+	xrandr --output VGA1 --mode "1920x1080_60.00"
+}
+
 clearls() {
     clear
     ls --color=auto
