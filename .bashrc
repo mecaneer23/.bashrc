@@ -4,8 +4,8 @@ case $- in
     *) return;;
 esac
 
-DEPENDENCY_SERVICE=1
-DEPENDENCY_GDRIVE=1
+DEPENDENCY_SERVICE=0
+DEPENDENCY_GDRIVE=0
 DEPENDENCY_THEMES=1
 install-themes() {
     sudo curl -Lo /usr/bin/theme.sh 'https://git.io/JM70M' && sudo chmod +x /usr/bin/theme.sh
@@ -13,7 +13,7 @@ install-themes() {
 DEPENDENCY_ALACRITTYCOLOR=0
 DEPENDENCY_NVIM=0
 
-CODE_DIR="/mnt/gdrive/My\ Drive/code/"
+CODE_DIR="~/Documents/"
 
 HISTCONTROL=ignoreboth
 shopt -s histappend
@@ -242,6 +242,8 @@ run-from-drive() {
             sub="hackercode/hackercode/HackerCode.py" ;;
         "todo")
             sub="todo/todo.py" ;;
+	"view-colors")
+	    sub="alacritty-color/view-colors.py" ;;
         "help")
             type run-from-drive 
             return
@@ -311,7 +313,7 @@ alias l.="ls -A | grep -E '^\.'"
 
 alias lc=lolcat
 alias cmx=cmatrix
-alias batcat=bat
+alias bat=batcat
 
 vim() {
     if [ -d "$1" ]; then
@@ -391,6 +393,7 @@ alias clock="run-from-drive clock $@"
 alias wordle="run-from-drive wordle $@"
 alias hc="run-from-drive HackerCode $@"
 alias todo="run-from-drive todo $@"
+alias vc="run-from-drive view-colors $@"
 
 if ((DEPENDENCY_GDRIVE)); then
     alias code="powershell.exe -c code ."
