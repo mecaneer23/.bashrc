@@ -33,30 +33,30 @@ force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-    color_prompt=yes
+        color_prompt=yes
     else
-    color_prompt=
+        color_prompt=
     fi
 fi
 
 if [ "$color_prompt" = yes ]; then
-	prompt_color='\[\033[1;32m\]'
+    prompt_color='\[\033[1;32m\]'
     if [ "$EUID" -eq 0 ]; then # Change prompt colors for root user
         prompt_color='\[\033[1;31m\]'
     fi
 
     PS1='${debian_chroot:+($debian_chroot)}'$prompt_color'[\u@\h]:\[\033[00m\]\n\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-	PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
+    xterm*|rxvt*)
+        PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+        ;;
+    *)
+        ;;
 esac
 
 if [ -x /usr/bin/dircolors ]; then
@@ -85,11 +85,11 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 if ! shopt -oq posix; then
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
 fi
 # . "$HOME/.cargo/env"
 export PATH="$PATH:$HOME/.cargo/bin"
@@ -111,43 +111,43 @@ set_time() {
 
 nf() {
     if [[ ! $1 ]]; then
-    neofetch --ascii_distro arch
+        neofetch --ascii_distro arch
     else 
-    neofetch --ascii_distro $1
+        neofetch --ascii_distro $1
     fi
 }
 
 set-resolution() {
-	if [[ $1 == "-h" ]]; then
-		echo "set-resolution 1920 1080 60"
-		return
-	fi
-	if [[ -z "$@" ]]; then
-		echo "An argument is needed to run this script";
-		return
-	else
-		arg="$@"
-		if [[ $(($(echo $arg | grep -o "\s" | wc --chars) / 2 )) -ne 2 ]]; then
-			echo "Invalid Parameters. You need to specify parameters in the format \"width height refreshRate\""
-			echo "For example setResolution \"1920 1080 60\""
-			return
-		fi
-		modename=$(echo $arg | sed 's/\s/_/g')
-		display=$(xrandr | grep -Po '.+(?=\sconnected)')
-		if [[ "$(xrandr|grep $modename)" = "" ]]; then
-			xrandr --newmode $modename $(gtf $(echo $arg) | grep -oP '(?<="\s\s).+') &&
-			xrandr --addmode $display $modename     
-		fi
-		xrandr --output $display --mode $modename
+    if [[ $1 == "-h" ]]; then
+        echo "set-resolution 1920 1080 60"
+        return
+    fi
+    if [[ -z "$@" ]]; then
+        echo "An argument is needed to run this script";
+        return
+    else
+        arg="$@"
+        if [[ $(($(echo $arg | grep -o "\s" | wc --chars) / 2 )) -ne 2 ]]; then
+            echo "Invalid Parameters. You need to specify parameters in the format \"width height refreshRate\""
+            echo "For example setResolution \"1920 1080 60\""
+            return
+        fi
+        modename=$(echo $arg | sed 's/\s/_/g')
+        display=$(xrandr | grep -Po '.+(?=\sconnected)')
+        if [[ "$(xrandr|grep $modename)" = "" ]]; then
+            xrandr --newmode $modename $(gtf $(echo $arg) | grep -oP '(?<="\s\s).+') &&
+            xrandr --addmode $display $modename     
+        fi
+        xrandr --output $display --mode $modename
 
-		if [[ $? -eq 0 ]]; then
-			echo "Display changed successfully to $arg"
-		fi
-	fi
-	gtf 1920 1080 60
-	xrandr --newmode "1920x1080_60.00"  172.80  1920 2040 2248 2576  1080 1081 1084 1118  -HSync +Vsync
-	xrandr --addmode VGA1 "1920x1080_60.00"
-	xrandr --output VGA1 --mode "1920x1080_60.00"
+        if [[ $? -eq 0 ]]; then
+            echo "Display changed successfully to $arg"
+        fi
+    fi
+    gtf 1920 1080 60
+    xrandr --newmode "1920x1080_60.00"  172.80  1920 2040 2248 2576  1080 1081 1084 1118  -HSync +Vsync
+    xrandr --addmode VGA1 "1920x1080_60.00"
+    xrandr --output VGA1 --mode "1920x1080_60.00"
 }
 
 clearls() {
@@ -175,27 +175,27 @@ set-prompt-color() {
 }
 
 ex() {
-  if [ -f $1 ]; then
+if [ -f $1 ]; then
     case $1 in
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1   ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
-      *.deb)       ar x $1      ;;
-      *.tar.xz)    tar xf $1    ;;
-      *.tar.zst)   tar xf $1    ;;
-      *)           echo "'$1' cannot be extracted via ex()" ;;
+        *.tar.bz2)   tar xjf $1   ;;
+        *.tar.gz)    tar xzf $1   ;;
+        *.bz2)       bunzip2 $1   ;;
+        *.rar)       unrar x $1   ;;
+        *.gz)        gunzip $1    ;;
+        *.tar)       tar xf $1    ;;
+        *.tbz2)      tar xjf $1   ;;
+        *.tgz)       tar xzf $1   ;;
+        *.zip)       unzip $1     ;;
+        *.Z)         uncompress $1;;
+        *.7z)        7z x $1      ;;
+        *.deb)       ar x $1      ;;
+        *.tar.xz)    tar xf $1    ;;
+        *.tar.zst)   tar xf $1    ;;
+        *)           echo "'$1' cannot be extracted via ex()" ;;
     esac
-  else
+else
     echo "'$1' is not a valid file"
-  fi
+fi
 }
 
 git() {
@@ -218,9 +218,9 @@ sudo() {
         else
             command sudo apt "$@"
         fi
-	elif [ "$1" = "clone" ]; then
-		shift
-		command sudo git clone https://github.com/mecaneer23/"$@"
+    elif [ "$1" = "clone" ]; then
+        shift
+        command sudo git clone https://github.com/mecaneer23/"$@"
     else
         command sudo "$@"
     fi
@@ -245,10 +245,10 @@ run-from-drive() {
             sub="hackercode/hackercode/HackerCode.py" ;;
         "todo")
             sub="todo/todo.py" ;;
-	"view-colors")
-	    sub="alacritty-color/view-colors.py" ;;
-	"alacritty-color")
-	    sub="alacritty-color/alacritty-color" ;;
+        "view-colors")
+            sub="alacritty-color/view-colors.py" ;;
+        "alacritty-color")
+            sub="alacritty-color/alacritty-color" ;;
         "help")
             type run-from-drive 
             return
@@ -286,9 +286,9 @@ export DEFAULT_DISPLAY=$DISPLAY;
 
 display-swap() {
     if [[ $DISPLAY == $DEFAULT_DISPLAY ]]; then
-    export DISPLAY=$XLAUNCH_DISPLAY;
+        export DISPLAY=$XLAUNCH_DISPLAY;
     elif [[ $DISPLAY == $XLAUNCH_DISPLAY ]]; then
-    export DISPLAY=$DEFAULT_DISPLAY;
+        export DISPLAY=$DEFAULT_DISPLAY;
     fi;
     echo $DISPLAY;
 }
@@ -326,8 +326,8 @@ vim() {
         command vim $@;
     elif ((DEPENDENCY_NVIM)); then
         nvim $@;
-	else
-		command vim $@
+    else
+        command vim $@
     fi
 }
 
@@ -335,17 +335,17 @@ alias rc="vim ~/.bashrc && source ~/.bashrc"
 alias vimrc="vim /home/$USER/.vimrc"
 
 if ((DEPENDENCY_ALACRITTYCOLOR)); then
-	AC_COMMAND="run-from-drive alacritty-color"
-	alias ac="$AC_COMMAND"
-	alias acc="$AC_COMMAND --current"
-	alias acr="$AC_COMMAND --random"
-	acl() {
-	  if [[ ! $1 ]]; then
-	    $AC_COMMAND --list
-	  else
-	    $AC_COMMAND --list | grep $1
-	  fi
-	}
+    AC_COMMAND="run-from-drive alacritty-color"
+    alias ac="$AC_COMMAND"
+    alias acc="$AC_COMMAND --current"
+    alias acr="$AC_COMMAND --random"
+    acl() {
+    if [[ ! $1 ]]; then
+        $AC_COMMAND --list
+    else
+        $AC_COMMAND --list | grep $1
+    fi
+    }
 fi
 
 if ((DEPENDENCY_THEMES)); then
