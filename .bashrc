@@ -4,8 +4,8 @@ case $- in
     *) return;;
 esac
 
-DEPENDENCY_SERVICE=0
-DEPENDENCY_GDRIVE=0
+DEPENDENCY_SERVICE=1
+DEPENDENCY_GDRIVE=1
 DEPENDENCY_THEMES=1
 install-themes() {
     sudo curl -Lo /usr/bin/theme.sh 'https://git.io/JM70M' && sudo chmod +x /usr/bin/theme.sh
@@ -260,7 +260,7 @@ run-from-drive() {
             ;;
     esac
     shift
-    if [ $(python3 -c 'exec("""\nimport os\nimport sys\nfrom pathlib import Path\n\nx = Path(sys.argv[1].replace("\\"", "")).expanduser()\nprint(x.is_file())\n""")' $directory$sub) == "True" ]; then
+    if [ $(python3 -c 'exec("""\nimport sys;from pathlib import Path\nprint(Path(" ".join(sys.argv[1:]).replace("\ ", " ")).expanduser().is_file())""")' $directory$sub) == "True" ]; then
         eval $directory$sub "$@"
     else
         echo "Error: Try running 'clone $(echo $sub | cut -d "/" -f 1)'"
