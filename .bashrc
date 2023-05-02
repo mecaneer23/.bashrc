@@ -321,6 +321,10 @@ alias lc=lolcat
 alias cmx=cmatrix
 alias sr="set-resolution 1920 1080 60"
 
+alias apti="sudo apt install"
+alias aptu="sudo apt update"
+alias paci="sudo pacman -S"
+
 vim() {
     if [ -d "$1" ]; then
         command vim $@;
