@@ -4,8 +4,8 @@ case $- in
     *) return;;
 esac
 
-DEPENDENCY_SERVICE=1
-DEPENDENCY_GDRIVE=1
+DEPENDENCY_SERVICE=0
+DEPENDENCY_GDRIVE=0
 DEPENDENCY_THEMES=0
 install-themes() {
     sudo curl -Lo /usr/bin/theme.sh 'https://git.io/JM70M' && sudo chmod +x /usr/bin/theme.sh
@@ -14,7 +14,9 @@ DEPENDENCY_ALACRITTYCOLOR=0
 DEPENDENCY_NVIM=0
 
 CODE_DIR="/mnt/gdrive/My\ Drive/code/"
-# CODE_DIR="~/Documents/"
+if ! [[ -d $CODE_DIR ]]; then
+    CODE_DIR="~/Documents/"
+fi
 
 HISTCONTROL=ignoreboth
 shopt -s histappend
