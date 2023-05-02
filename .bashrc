@@ -14,6 +14,7 @@ DEPENDENCY_ALACRITTYCOLOR=0
 DEPENDENCY_NVIM=0
 
 CODE_DIR="/mnt/gdrive/My\ Drive/code/"
+# CODE_DIR="~/Documents/"
 
 HISTCONTROL=ignoreboth
 shopt -s histappend
