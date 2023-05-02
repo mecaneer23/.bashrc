@@ -363,11 +363,11 @@ alias celar=clear
 
 alias ga="git add"
 alias gc="git commit -m"
-alias gph="git push"
 alias gp="git push"
 alias gpl="git pull"
 alias gs="git status"
 alias gd="git diff"
+alias gl="git log"
 clone() {
     git clone https://github.com/mecaneer23/$1 $2
 }
