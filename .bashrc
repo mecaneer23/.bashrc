@@ -19,6 +19,8 @@ if ! [[ -d $CODE_DIR ]]; then
     CODE_DIR="~/Documents/"
 fi
 
+export EDITOR="vim"
+
 HISTCONTROL=ignoreboth
 shopt -s histappend
 HISTSIZE=1000
@@ -92,6 +94,15 @@ if ! shopt -oq posix; then
         . /etc/bash_completion
     fi
 fi
+
+install-insulter() {
+    sudo wget -O /etc/bash.command-not-found https://raw.githubusercontent.com/hkbakke/bash-insulter/master/src/bash.command-not-found
+}
+
+if [ -f /etc/bash.command-not-found ]; then
+    . /etc/bash.command-not-found
+fi
+
 # . "$HOME/.cargo/env"
 export PATH="$PATH:$HOME/.cargo/bin"
 
@@ -322,7 +333,13 @@ alias la='ls -A'
 alias l='ls -CF'
 alias l.="ls -A | grep -E '^\.'"
 
+alias cp="cp -i"
+alias mv='mv -i'
+alias rm='rm -i'
+
 alias lc=lolcat
+alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
+alias cs=cowsay
 alias cmx=cmatrix
 alias sr="set-resolution 1920 1080 60"
 
