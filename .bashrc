@@ -314,6 +314,7 @@ alias l.="ls -A | grep -E '^\.'"
 alias lc=lolcat
 alias cmx=cmatrix
 alias bat=batcat
+alias sr="set-resolution 1920 1080 60"
 
 vim() {
     if [ -d "$1" ]; then
