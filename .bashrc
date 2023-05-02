@@ -10,7 +10,7 @@ DEPENDENCY_THEMES=0
 install-themes() {
     sudo curl -Lo /usr/bin/theme.sh 'https://git.io/JM70M' && sudo chmod +x /usr/bin/theme.sh
 }
-DEPENDENCY_ALACRITTYCOLOR=0
+DEPENDENCY_ALACRITTYCOLOR=1
 DEPENDENCY_NVIM=0
 
 CODE_DIR="/mnt/gdrive/My\ Drive/code/"
@@ -247,6 +247,8 @@ run-from-drive() {
             sub="todo/todo.py" ;;
 	"view-colors")
 	    sub="alacritty-color/view-colors.py" ;;
+	"alacritty-color")
+	    sub="alacritty-color/alacritty-color" ;;
         "help")
             type run-from-drive 
             return
@@ -333,14 +335,15 @@ alias rc="vim ~/.bashrc && source ~/.bashrc"
 alias vimrc="vim /home/$USER/.vimrc"
 
 if ((DEPENDENCY_ALACRITTYCOLOR)); then
-	alias ac="alacritty-color"
-	alias acc="alacritty-color --current"
-	alias acr="alacritty-color --random"
+	AC_COMMAND="run-from-drive alacritty-color"
+	alias ac="$AC_COMMAND"
+	alias acc="$AC_COMMAND --current"
+	alias acr="$AC_COMMAND --random"
 	acl() {
 	  if [[ ! $1 ]]; then
-	    alacritty-color --list
+	    $AC_COMMAND --list
 	  else
-	    alacritty-color --list | grep $1
+	    $AC_COMMAND --list | grep $1
 	  fi
 	}
 fi
