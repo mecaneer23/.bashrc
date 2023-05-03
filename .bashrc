@@ -349,8 +349,10 @@ if ((DEPENDENCY_ALACRITTYCOLOR)); then
 fi
 
 if ((DEPENDENCY_THEMES)); then
-    theme.sh kimber || dependency-error THEMES # spacedust
-	alias ac="vim + /mnt/c/Users/mecan/AppData/Roaming/alacritty/alacritty.yml"
+    theme.sh kimber || dependency-error THEMES
+    #        spacedust
+    #        nova
+    alias ac="vim + /mnt/c/Users/mecan/AppData/Roaming/alacritty/alacritty.yml"
 fi
 
 alias celar=clear
