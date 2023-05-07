@@ -4,8 +4,8 @@ case $- in
     *) return;;
 esac
 
-DEPENDENCY_SERVICE=1
-DEPENDENCY_GDRIVE=1
+DEPENDENCY_SERVICE=0
+DEPENDENCY_GDRIVE=0
 DEPENDENCY_THEMES=1
 install-themes() {
     sudo curl -Lo /usr/bin/theme.sh 'https://git.io/JM70M' && sudo chmod +x /usr/bin/theme.sh
@@ -255,12 +255,16 @@ run-from-drive() {
             return
             ;;
         *)
-            echo "$@ not implemented in run-from-drive function"
+            echo "Error: $@ not implemented in run-from-drive function"
             return
             ;;
     esac
     shift
-    eval $directory$sub "$@"
+    if [ $(python3 -c 'exec("""\nimport os\nimport sys\nfrom pathlib import Path\n\nx = Path(sys.argv[1].replace("\\"", "")).expanduser()\nprint(x.is_file())\n""")' $directory$sub) == "True" ]; then
+        eval $directory$sub "$@"
+    else
+        echo "Error: Try running 'clone $(echo $sub | cut -d "/" -f 1)'"
+    fi
 }
 
 mnt() {
