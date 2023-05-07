@@ -15,6 +15,7 @@ DEPENDENCY_NVIM=0
 
 CODE_DIR="/mnt/gdrive/My\ Drive/code/"
 if ! [[ -d $CODE_DIR ]]; then
+    # if this doesn't work make sure DEPENDENCY_GDRIVE == 0
     CODE_DIR="~/Documents/"
 fi
 
