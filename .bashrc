@@ -19,6 +19,7 @@ if ! [[ -d $CODE_DIR ]]; then
     CODE_DIR="~/Documents/"
 fi
 
+WINDOWS_USER="user"
 export EDITOR="vim"
 
 HISTCONTROL=ignoreboth
@@ -263,6 +264,8 @@ run-from-drive() {
             sub="alacritty-color/view-colors.py" ;;
         "alacritty-color")
             sub="alacritty-color/alacritty-color" ;;
+		"snake-case")
+			sub="to-snake-case/snake_case.py" ;;
         "help")
             type run-from-drive 
             return
@@ -380,7 +383,7 @@ if ((DEPENDENCY_THEMES)); then
     theme.sh kimber || dependency-error THEMES
     #        spacedust
     #        nova
-    alias ac="vim + /mnt/c/Users/mecan/AppData/Roaming/alacritty/alacritty.yml"
+    alias ac="vim + /mnt/c/Users/$WINDOWS_USER/AppData/Roaming/alacritty/alacritty.yml"
 fi
 
 alias celar=clear
@@ -401,9 +404,10 @@ alias spd=set-prompt-dollar
 alias spc=set-prompt-color
 alias reset-time=set_time
 
-alias c="cd /mnt/c/Users/mecan/OneDrive/Documents/"
+alias c="cd /mnt/c/Users/$WINDOWS_USER/OneDrive/Documents/"
 alias g="cd $CODE_DIR"
-alias d="cd /mnt/c/Users/mecan/Downloads/"
+alias f="cd $CODE_DIR/../files"
+alias d="cd /mnt/c/Users/$WINDOWS_USER/Downloads/"
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -432,6 +436,7 @@ alias wordle="run-from-drive wordle $@"
 alias hc="run-from-drive HackerCode $@"
 alias todo="run-from-drive todo $@"
 alias vc="run-from-drive view-colors $@"
+alias sc="run-from-drive snake-case $@"
 
 if ((DEPENDENCY_GDRIVE)); then
     alias code="powershell.exe -c code ."
