@@ -245,6 +245,8 @@ run-from-drive() {
             sub="programming-languages/bin-snake/bin_snake.py" ;;
         "snake")
             sub="snake/python-snake-game/snake.py" ;;
+        "binary-decimal")
+            sub="binary-decimal/BinarytoDecimal.py" ;;
         "sl")
             sub="sl/sl.py" ;;
         "becho")
@@ -422,6 +424,7 @@ alias pdb="python3 -m pdb"
 
 alias bs="run-from-drive bin-snake $@"
 alias snake="run-from-drive snake $@"
+alias btd="run-from-drive binary-decimal $@"
 alias sl="run-from-drive sl $@"
 alias becho="run-from-drive becho $@"
 alias clock="run-from-drive clock $@"
