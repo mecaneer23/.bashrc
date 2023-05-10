@@ -15,8 +15,11 @@ DEPENDENCY_NVIM=0
 
 CODE_DIR="/mnt/gdrive/My\ Drive/code/"
 if ! [[ -d $CODE_DIR ]]; then
+    # if this doesn't work make sure DEPENDENCY_GDRIVE == 0
     CODE_DIR="~/Documents/"
 fi
+
+export EDITOR="vim"
 
 HISTCONTROL=ignoreboth
 shopt -s histappend
@@ -91,6 +94,15 @@ if ! shopt -oq posix; then
         . /etc/bash_completion
     fi
 fi
+
+install-insulter() {
+    sudo wget -O /etc/bash.command-not-found https://raw.githubusercontent.com/hkbakke/bash-insulter/master/src/bash.command-not-found
+}
+
+if [ -f /etc/bash.command-not-found ]; then
+    . /etc/bash.command-not-found
+fi
+
 # . "$HOME/.cargo/env"
 export PATH="$PATH:$HOME/.cargo/bin"
 
@@ -256,12 +268,16 @@ run-from-drive() {
             return
             ;;
         *)
-            echo "$@ not implemented in run-from-drive function"
+            echo "Error: $@ not implemented in run-from-drive function"
             return
             ;;
     esac
     shift
-    eval $directory$sub "$@"
+    if [ $(python3 -c 'exec("""\nimport sys;from pathlib import Path\nprint(Path(" ".join(sys.argv[1:]).replace("\ ", " ")).expanduser().is_file())""")' $directory$sub) == "True" ]; then
+        eval $directory$sub "$@"
+    else
+        echo "Error: Try running 'clone $(echo $sub | cut -d "/" -f 1)'"
+    fi
 }
 
 mnt() {
@@ -319,7 +335,13 @@ alias la='ls -A'
 alias l='ls -CF'
 alias l.="ls -A | grep -E '^\.'"
 
+alias cp="cp -i"
+alias mv='mv -i'
+alias rm='rm -i'
+
 alias lc=lolcat
+alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
+alias cs=cowsay
 alias cmx=cmatrix
 alias sr="set-resolution 1920 1080 60"
 
