@@ -439,6 +439,6 @@ alias vc="run-from-drive view-colors $@"
 alias sc="run-from-drive snake-case $@"
 
 if ((DEPENDENCY_GDRIVE)); then
-    alias code="powershell.exe -c code ."
+    alias code="powershell.exe -c 'code .' &"
     alias cmd="powershell.exe"
 fi
