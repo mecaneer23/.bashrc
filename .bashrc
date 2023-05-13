@@ -423,7 +423,7 @@ alias ssh-home="ssh mecaneer23@ssh.mecaneer23.net"
 
 alias py=python3
 alias py310="python3.10"
-alias ipy=ipython
+alias ipy=ipython3
 alias pdb="python3 -m pdb"
 
 alias bs="run-from-drive bin-snake $@"
