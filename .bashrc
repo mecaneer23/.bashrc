@@ -19,7 +19,7 @@ if ! [[ -d $CODE_DIR ]]; then
     CODE_DIR="~/Documents/"
 fi
 
-WINDOWS_USER="user"
+WINDOWS_USER="mecan"
 export EDITOR="vim"
 
 HISTCONTROL=ignoreboth
@@ -192,6 +192,11 @@ if [ -f $1 ]; then
     case $1 in
         *.tar.bz2)   tar xjf $1   ;;
         *.tar.gz)    tar xzf $1   ;;
+        *.tar.lz)
+            lzip -d -k $1
+            tar xf ${1%.lz}
+            rm -f ${1%.lz}
+            ;;
         *.bz2)       bunzip2 $1   ;;
         *.rar)       unrar x $1   ;;
         *.gz)        gunzip $1    ;;
