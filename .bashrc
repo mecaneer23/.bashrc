@@ -278,6 +278,8 @@ run-from-drive() {
             sub="alacritty-color/alacritty-color" ;;
 		"snake-case")
 			sub="to-snake-case/snake_case.py" ;;
+        "settings")
+            sub="simple-settings/tkmenu.py" ;;
         "help")
             type run-from-drive 
             return
@@ -449,6 +451,7 @@ alias hc="run-from-drive HackerCode $@"
 alias todo="run-from-drive todo $@"
 alias vc="run-from-drive view-colors $@"
 alias sc="run-from-drive snake-case $@"
+alias settings="run-from-drive settings $@"
 
 if ((DEPENDENCY_GDRIVE)); then
     alias code="powershell.exe -c 'code .' &"
