@@ -114,6 +114,7 @@ dependency-error() {
 if ((DEPENDENCY_SERVICE)); then
     if [[ $(service ssh status | grep "not") ]]; then
         sudo service ssh start
+	# sudo systemctl start sshd.service
     fi
 fi
 
