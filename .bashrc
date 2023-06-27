@@ -125,6 +125,17 @@ install-glow() {
     sudo apt update && sudo apt install glow
 }
 
+install-bashrc() {
+	git clone https://github.com/mecaneer23/.bashrc temp.bashrc;
+	for i in $(ls temp.bashrc); do
+		mv ~/$i ~/$i.old;
+	done;
+	mv temp.bashrc/* ~/
+	mv temp.bashrc/.* ~/
+	rm -rf temp.bashrc;
+	source ~/.bashrc
+}
+
 set_time() {
     # sudo hwclock -s
     sudo ntpdate time.windows.com
