@@ -361,6 +361,7 @@ alias lc=lolcat
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 alias cs=cowsay
 alias cmx=cmatrix
+alias bat=batcat
 alias sr="set-resolution 1920 1080 60"
 
 alias apti="sudo apt install"
