@@ -113,6 +113,7 @@ dependency-error() {
 
 if ((DEPENDENCY_SERVICE)); then
     if [[ $(service ssh status | grep "not") ]]; then
+        echo "starting ssh server"
         sudo service ssh start
 	# sudo systemctl start sshd.service
     fi
@@ -350,6 +351,7 @@ mount-gdrive() {
 
 if ((DEPENDENCY_GDRIVE)); then
     if [ ! "$(ls -A /mnt/gdrive)" ]; then
+        echo "mounting gdrive"
         mount-gdrive g || dependency-error GDRIVE
         #if [ "$out" ]; then
         #   sudo umount /mnt/gdrive
