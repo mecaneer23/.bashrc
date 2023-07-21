@@ -104,8 +104,10 @@ if [ -f /etc/bash.command-not-found ]; then
     . /etc/bash.command-not-found
 fi
 
+export GEM_HOME="$HOME/gems"
 # . "$HOME/.cargo/env"
 export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$HOME/gems/bin:$PATH"
 
 dependency-error() {
     echo "If this error bothers you, consider setting the DEPENDENCY_$1 flag at the top of this file to '0'"
