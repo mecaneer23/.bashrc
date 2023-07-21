@@ -316,6 +316,12 @@ mnt() {
     cd /mnt/$1
 }
 
+qemu() {
+    read -p "Path to file: " path
+    read -p "Memory in MB (2048, etc): " mem 
+    sudo qemu-system-x86_64 -enable-kvm -cdrom path -m mem -sdl
+}
+
 serve() {
     (python3 -m http.server &)
     (python3 -c "import webbrowser; webbrowser.open('localhost:8000')" &)
