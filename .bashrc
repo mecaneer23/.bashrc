@@ -139,6 +139,10 @@ install-bashrc() {
 	source ~/.bashrc
 }
 
+fix-run-detectors-error() {
+    sudo update-binfmts --disable cli
+}
+
 set_time() {
     # sudo hwclock -s
     sudo ntpdate time.windows.com
