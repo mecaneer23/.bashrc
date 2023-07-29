@@ -143,10 +143,12 @@ fix-run-detectors-error() {
     sudo update-binfmts --disable cli
 }
 
-set_time() {
+reset-time() {
     # sudo hwclock -s
+    echo resetting time...
     sudo ntpdate time.windows.com
 }
+reset-time
 
 nf() {
     if [[ ! $1 ]]; then
@@ -386,7 +388,7 @@ alias lc=lolcat
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 alias cs=cowsay
 alias cmx=cmatrix
-alias bat=batcat
+# alias bat=batcat
 alias sr="set-resolution 1920 1080 60"
 
 alias apti="sudo apt install"
@@ -443,7 +445,6 @@ clone() {
 alias sps=set-prompt-short
 alias spd=set-prompt-dollar
 alias spc=set-prompt-color
-alias reset-time=set_time
 
 alias c="cd /mnt/c/Users/$WINDOWS_USER/OneDrive/Documents/"
 alias g="cd $CODE_DIR"
