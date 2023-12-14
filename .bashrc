@@ -4,7 +4,7 @@ case $- in
     *) return;;
 esac
 
-DEPENDENCY_SERVICE=1
+DEPENDENCY_SERVICE=0
 DEPENDENCY_GDRIVE=1
 DEPENDENCY_THEMES=1
 install-themes() {
