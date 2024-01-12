@@ -301,6 +301,8 @@ run-from-drive() {
 			sub="to-snake-case/snake_case.py" ;;
         "settings")
             sub="simple-settings/tkmenu.py" ;;
+	"waiwo")
+	    sub="what-am-i-working-on/generate.py" ;;
         "help")
             type run-from-drive 
             return
@@ -484,4 +486,8 @@ alias settings="run-from-drive settings $@"
 if ((DEPENDENCY_GDRIVE)); then
     alias code="powershell.exe -c 'code .' &"
     alias cmd="powershell.exe"
+    alias waiwo="cmd python '\"G:\My Drive\code\what-am-i-working-on\generate.py\"' $@"
+else
+    alias waiwo="run-from-drive waiwo $@"
 fi
+
