@@ -278,7 +278,7 @@ run-from-drive() {
         "bin-snake")
             sub="programming-languages/bin-snake/bin_snake.py" ;;
         "snake")
-            sub="snake/python-snake-game/snake.py" ;;
+            sub="games/snake/python-snake-game/snake.py" ;;
         "binary-decimal")
             sub="binary-decimal/BinarytoDecimal.py" ;;
         "sl")
