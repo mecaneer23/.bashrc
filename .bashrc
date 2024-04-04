@@ -121,6 +121,10 @@ if ((DEPENDENCY_SERVICE)); then
     fi
 fi
 
+install-tt() {
+	sudo curl -L https://github.com/lemnos/tt/releases/download/v0.4.2/tt-linux -o /usr/local/bin/tt && sudo chmod +x /usr/local/bin/tt
+}
+
 install-glow() {
     sudo mkdir -p /etc/apt/keyrings
     curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
