@@ -502,3 +502,5 @@ else
     alias waiwo="run-from-drive waiwo $@"
 fi
 
+alias get-recent-commit-url='echo "$(git remote get-url origin)/commit/$(get-most-recent-sha)"'
+
