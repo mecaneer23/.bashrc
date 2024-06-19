@@ -5,6 +5,7 @@ case $- in
 esac
 
 DEPENDENCY_SERVICE=0
+DEPENDENCY_TIME=1
 DEPENDENCY_GDRIVE=1
 DEPENDENCY_THEMES=1
 install-themes() {
@@ -152,7 +153,9 @@ reset-time() {
     echo resetting time...
     sudo ntpdate time.windows.com
 }
-reset-time
+if ((DEPENDENCY_TIME)); then
+    reset-time;
+fi
 
 nf() {
     if [[ ! $1 ]]; then
@@ -359,6 +362,10 @@ display-swap() {
         export DISPLAY=$DEFAULT_DISPLAY;
     fi;
     echo $DISPLAY;
+}
+
+get-most-recent-sha() {
+    git log -n 1 | grep commit | awk '{print $2}'
 }
 
 mount-gdrive() {
