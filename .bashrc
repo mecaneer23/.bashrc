@@ -118,12 +118,12 @@ if ((DEPENDENCY_SERVICE)); then
     if [[ $(service ssh status | grep "not") ]]; then
         echo "starting ssh server"
         sudo service ssh start
-	# sudo systemctl start sshd.service
+    # sudo systemctl start sshd.service
     fi
 fi
 
 install-tt() {
-	sudo curl -L https://github.com/lemnos/tt/releases/download/v0.4.2/tt-linux -o /usr/local/bin/tt && sudo chmod +x /usr/local/bin/tt
+    sudo curl -L https://github.com/lemnos/tt/releases/download/v0.4.2/tt-linux -o /usr/local/bin/tt && sudo chmod +x /usr/local/bin/tt
 }
 
 install-glow() {
@@ -134,14 +134,15 @@ install-glow() {
 }
 
 install-bashrc() {
-	git clone https://github.com/mecaneer23/.bashrc temp.bashrc;
-	for i in $(ls temp.bashrc); do
-		mv ~/$i ~/$i.old;
-	done;
-	mv temp.bashrc/* ~/
-	mv temp.bashrc/.* ~/
-	rm -rf temp.bashrc;
-	source ~/.bashrc
+    sudo apt install git -y
+    git clone https://github.com/mecaneer23/.bashrc temp.bashrc;
+    for i in $(ls temp.bashrc); do
+        mv ~/$i ~/$i.old;
+    done;
+    mv temp.bashrc/* ~/
+    mv temp.bashrc/.* ~/
+    rm -rf temp.bashrc;
+    source ~/.bashrc
 }
 
 fix-run-detectors-error() {
@@ -304,12 +305,12 @@ run-from-drive() {
             sub="alacritty-color/view-colors.py" ;;
         "alacritty-color")
             sub="alacritty-color/alacritty-color" ;;
-		"snake-case")
-			sub="to-snake-case/snake_case.py" ;;
+        "snake-case")
+            sub="to-snake-case/snake_case.py" ;;
         "settings")
             sub="simple-settings/tkmenu.py" ;;
-	"waiwo")
-	    sub="what-am-i-working-on/generate.py" ;;
+    "waiwo")
+        sub="what-am-i-working-on/generate.py" ;;
         "help")
             type run-from-drive 
             return
