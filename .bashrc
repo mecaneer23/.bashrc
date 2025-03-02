@@ -324,7 +324,7 @@ run-from-drive() {
     if [ $(python3 -c 'exec("""\nimport sys;from pathlib import Path\nprint(Path(" ".join(sys.argv[1:]).replace("\ ", " ")).expanduser().is_file())""")' $directory$sub) == "True" ]; then
         eval $directory$sub "$@"
     else
-        echo "Error: Try running 'clone $(echo $sub | cut -d "/" -f 1)'"
+        echo "Error: Try running 'g && clone $(echo $sub | cut -d "/" -f 1)'"
     fi
 }
 
